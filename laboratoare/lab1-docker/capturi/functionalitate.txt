@@ -1,0 +1,8 @@
+OK: autentificare prin interfata cu alice / alice123.
+OK: creare notita privata.
+OK: creare notita publica.
+OK: cautare dupa titlu: exact cele doua notite Lab 1.
+OK: tabul Notite publice afiseaza notita publica si nu afiseaza notita privata.
+OK: iesire din cont.
+OK: inregistrare prin interfata a unui cont nou (lab1_test_1792678439034); parola aleatorie nu este salvata in raport.
+OK: autentificare ulterioara cu noul cont.

@@ -26,10 +26,16 @@ Fiecare fișă are la final tabelul cu **variantele individuale**.
 ## Pornire rapidă
 
 ```bash
+cp .env.example .env
+# Editează .env: DB_PASSWORD = rezultatul `openssl rand -hex 16`,
+# JWT_SECRET = rezultatul `openssl rand -hex 32`.
 docker compose up -d --build
 ```
 
-Deschide http://localhost:8080 și intră cu `alice` / `alice123`.
+Deschide http://localhost:8093 și intră cu `alice` / `alice123`.
+
+Configurația curentă corespunde variantei 13: ONG (notițe despre beneficiari).
+Raportul și capturile pentru laboratorul 1 sunt în [laboratoare/lab1-docker/RAPORT.md](laboratoare/lab1-docker/RAPORT.md).
 
 ## Ce îți trebuie
 

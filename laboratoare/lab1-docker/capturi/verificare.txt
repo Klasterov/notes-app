@@ -1,0 +1,55 @@
+LABORATORUL 1 - Varianta 13: ONG, port 8093
+Verificari executate local pe 22.10.2026
+
+> docker compose ps
+NAME              IMAGE                COMMAND                  SERVICE   CREATED          STATUS          PORTS
+notes-app-api-1   notes-app-api        "docker-entrypoint.s…"   api       8 minutes ago    Up 7 minutes    3000/tcp
+notes-app-db-1    postgres:17-alpine   "docker-entrypoint.s…"   db        8 minutes ago    Up 7 minutes    5432/tcp
+notes-app-web-1   notes-app-web        "/docker-entrypoint.…"   web       38 seconds ago   Up 36 seconds   127.0.0.1:8093->80/tcp
+
+> docker compose exec -T api whoami
+node
+
+> docker compose exec -T api node --version
+v22.23.4
+
+> curl.exe --fail --silent http://localhost:8093/api/health
+{"status":"ok"}
+
+> curl.exe --noproxy * --connect-timeout 3 http://127.0.0.1:3000/api/health
+Conexiune refuzata (curl exit 7).
+
+> docker inspect notes-app-api-1 --format '{{json .HostConfig.PortBindings}}'
+{}
+
+> docker inspect notes-app-db-1 --format '{{json .HostConfig.PortBindings}}'
+{}
+
+> git check-ignore .env
+.env
+
+> git ls-files -- .env
+(fara rezultate: .env nu este urmarit de Git)
+
+> git status --short
+ M .gitignore
+ M README.md
+ M backend/Dockerfile
+ M backend/src/auth.ts
+ M backend/src/db.service.ts
+ M docker-compose.yml
+?? .env.example
+?? laboratoare/lab1-docker/RAPORT.md
+?? laboratoare/lab1-docker/capturi/
+
+> docker compose config --quiet
+OK
+
+> docker compose run --rm --no-deps -e JWT_SECRET= api node -e "require('./dist/auth')"
+Respins la pornire: JWT_SECRET lipseste sau este prea scurt.
+
+> docker compose run --rm --no-deps -e JWT_SECRET=scurt api node -e "require('./dist/auth')"
+Respins la pornire: JWT_SECRET lipseste sau este prea scurt.
+
+Nota: gazda are separat un proces postgres pe 5432, care nu a fost modificat.
+Containerul db din proiect nu are porturi publicate (PortBindings = {}).
